@@ -6,6 +6,8 @@ public:
         //and then find the longest index j such that nums[j]>=nums[i]
         // and then swap nums[i],nums[j]
         //and then reverse the suffix (i+1,end)
+        
+        //Time O(N), Space O(1)
         int pivot=-1,n=nums.size();
         
         //step-1
