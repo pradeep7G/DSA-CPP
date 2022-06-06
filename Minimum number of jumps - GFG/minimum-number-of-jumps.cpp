@@ -17,6 +17,8 @@ class Solution{
             {
                 maxreach=arr[i]+i;
             }
+            if(maxreach<i)
+                return -1;
             if(i==current)
             {
                 current=maxreach;
