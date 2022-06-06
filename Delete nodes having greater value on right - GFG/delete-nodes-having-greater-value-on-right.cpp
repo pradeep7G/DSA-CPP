@@ -48,21 +48,30 @@ class Solution
     public:
     Node *compute(Node *head)
     {
-       Node *temp=head;
-       Node *cur=head;
-       while(temp->next)
-       {
-           if(temp->data < temp->next->data){
-               cur=temp;
-               cur->data=cur->next->data;
-               cur->next=cur->next->next;
-               temp=head;
-           }
-           else{
-               temp=temp->next;
-           }
-       }
-       return head;
+        if(!head || !head->next)
+            return head;
+    //   Node *temp=head;
+    //   Node *cur=head;
+    //   while(temp->next)
+    //   {
+    //       if(temp->data < temp->next->data){
+    //           cur=temp;
+    //           cur->data=cur->next->data;
+    //           cur->next=cur->next->next;
+    //           temp=head;
+    //       }
+    //       else{
+    //           temp=temp->next;
+    //       }
+    //   }
+     Node *cur=compute(head->next);
+     if(head->data>=cur->data)
+     {
+         head->next=cur;
+         return head;
+     }else{
+         return cur;
+     }
     }
     
 };
