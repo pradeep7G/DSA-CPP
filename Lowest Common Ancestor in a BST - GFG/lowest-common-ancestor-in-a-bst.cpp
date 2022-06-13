@@ -101,23 +101,33 @@ int main()
 
 //Function to find the lowest common ancestor in a BST. 
 Node* lca(Node* root,int n1,int n2){
+    // if(!root)
+    //     return NULL;
+    // if(root->data==n1 || root->data==n2){
+    //     return root;
+    // }
+    // Node* leftlca=lca(root->left,n1,n2);
+    // Node* rightlca=lca(root->right,n1,n2);
+    // if(leftlca && rightlca)
+    //     return root;
+    // if(!leftlca || !rightlca){
+    //     return leftlca?leftlca :rightlca;
+    // }
     if(!root)
         return NULL;
-    if(root->data==n1 || root->data==n2){
-        return root;
+   if(root->data < n1 && root->data < n2){
+        return lca(root->right,n1,n2);
     }
-    Node* leftlca=lca(root->left,n1,n2);
-    Node* rightlca=lca(root->right,n1,n2);
-    if(leftlca && rightlca)
-        return root;
-    if(!leftlca || !rightlca){
-        return leftlca?leftlca :rightlca;
+    else if(root->data > n1 && root->data > n2){
+        return lca(root->left,n1,n2);
     }
+    else 
+        return root;
     
 }
 Node* LCA(Node *root, int n1, int n2)
 {
-   Node* Lca=lca(root,n1,n2);
+   Node* Lca=lca(root,min(n1,n2),max(n1,n2));
    return Lca;
 }
 
