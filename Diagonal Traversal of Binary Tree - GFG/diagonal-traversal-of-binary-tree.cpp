@@ -120,22 +120,20 @@ struct Node
     Node* left, * right;
 }; */
 
-void printdiagonal(Node* root,int d,map<int,vector<int>> &mp){
+void traversediagonal(Node *root,int d,map<int,vector<int>> &mp){
     if(!root)
         return ;
     mp[d].push_back(root->data);
-    printdiagonal(root->left,d+1,mp);
-    printdiagonal(root->right,d,mp);
+    traversediagonal(root->left,d+1,mp);
+    traversediagonal(root->right,d,mp);
 }
 vector<int> diagonal(Node *root)
 {
-   vector<int> ans;
    map<int,vector<int>> mp;
-   printdiagonal(root,0,mp);
-   for(auto &m:mp){
-       for(auto c:m.second){
-           ans.push_back(c);
-       }
-   }
+   traversediagonal(root,0,mp);
+   vector<int> ans;
+   for(auto v:mp)
+   for(auto i:v.second)
+   ans.push_back(i);
    return ans;
 }
