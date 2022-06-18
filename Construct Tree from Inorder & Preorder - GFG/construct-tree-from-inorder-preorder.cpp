@@ -41,31 +41,26 @@ struct Node
 */
 class Solution{
     public:
-    unordered_map<int,int> mp;
-    Node* constructtree(int in[],int pre[],int &index,int start,int end){
-        if(start > end)
-        {
+    Node* constructtree(int &index,int pre[],unordered_map<int,int> &inorder,int start,int end){
+        if(start>end)
             return NULL;
-        }
-        int indexinorder=mp[pre[index]];
         Node* root=new Node(pre[index]);
-        index++;
-        if(end==start){
+        int rootindex=inorder[pre[index++]];
+          if(start==end)
             return root;
-        }
-        root->left=constructtree(in,pre,index,start,indexinorder-1);
-        root->right=constructtree(in,pre,index,indexinorder+1,end);
+        root->left=constructtree(index,pre,inorder,start,rootindex-1);
+        root->right=constructtree(index,pre,inorder,rootindex+1,end);
         return root;
     }
     Node* buildTree(int in[],int pre[], int n)
     {
-        mp.clear();
+       unordered_map<int,int> mp;
        for(int i=0;i<n;i++){
            mp[in[i]]=i;
        }
        int index=0;
-       Node* root=constructtree(in,pre,index,0,n-1);
-       return root;
+       int end=n-1;
+       return constructtree(index,pre,mp,index,end);
     }
 };
 
