@@ -104,6 +104,8 @@ class Solution
     public:
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
+    map<int,int> mp;
+    map<int,pair<int,int>> m;
     vector<int> iterative(Node *root){
         if(!root)
             return {};
@@ -128,10 +130,22 @@ class Solution
          res.push_back(m.second);
         return res;
     }
-    vector<
+    void recursive(Node* root,int d,int l){
+        if(!root)
+            return ;
+        if(m.count(d)==0){
+            m[d]={root->data,l};
+        }
+        else if(m[d].second > l){
+            m[d]={root->data,l};
+        }
+        recursive(root->left,d-1,l+1);
+        recursive(root->right,d+1,l+1);
+    }
     vector<int> topView(Node *root)
     {
         // map<int,int> mp;
+        mp.clear();
         // queue<pair<Node *,int>> q;
         // q.push({root,0});
         // while(!q.empty()){
@@ -150,11 +164,12 @@ class Solution
         //         q.push({temp->right,i+1});
         //     }
         // }
-        // vector<int> ans;
-        // for(auto m:mp){
-        //     ans.push_back(m.second);
-        // }
-        return iterative(root);
+        recursive(root,0,0);
+        vector<int> ans;
+        for(auto p:m){
+            ans.push_back(p.second.first);
+        }
+        return ans;
     }
 
 };
