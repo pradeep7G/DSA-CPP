@@ -107,24 +107,25 @@ class Solution {
 public:
     void travelleft(Node* root,vector<int> &ans){
         if(!root || (root->left==NULL && root->right==NULL))
-            return ;
+         return ;
         ans.push_back(root->data);
         if(root->left){
             travelleft(root->left,ans);
         }
-        else
-        travelleft(root->right,ans);
+        else{
+            travelleft(root->right,ans);
+        }
     }
     void travelright(Node* root,vector<int> &ans){
           if(!root || (root->left==NULL && root->right==NULL))
             return ;
-        if(root->right){
-        travelright(root->right,ans);
-        }
-        else{
-            travelright(root->left,ans);
-        }
-        ans.push_back(root->data);
+       if(root->right){
+           travelright(root->right,ans);
+       }
+       else{
+           travelright(root->left,ans);
+       }
+       ans.push_back(root->data);
     }
     void travelleaf(Node* root,vector<int> &ans){
         if(!root)
@@ -137,15 +138,15 @@ public:
     }
     vector <int> boundary(Node *root)
     {
-        vector<int> ans;
-        if(!root)
-            return ans;
-        ans.push_back(root->data);
-        travelleft(root->left,ans);
-        travelleaf(root->left,ans);
-        travelleaf(root->right,ans);
-        travelright(root->right,ans);
-        return ans;
+       vector<int> ans;
+       if(!root)
+        return {};
+       ans.push_back(root->data);
+       travelleft(root->left,ans);
+       travelleaf(root->left,ans);
+       travelleaf(root->right,ans);
+       travelright(root->right,ans);
+       return ans;
     }
 };
 
