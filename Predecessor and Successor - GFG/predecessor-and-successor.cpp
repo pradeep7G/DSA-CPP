@@ -106,30 +106,58 @@ struct Node
 
 // This function finds predecessor and successor of key in BST.
 // It sets pre and suc as predecessor and successor respectively
-void findpresuc(Node* root,Node*& pre,Node* &suc,int key){
-    if(!root){
+// void findpresuc(Node* root,Node*& pre,Node* &suc,int key){
+//     if(!root){
+//         return ;
+//     }
+//     if(root->key == key){
+//         if(root->left){
+//             Node* cur=root->left;
+//             while(cur->right)
+//             cur=cur->right;
+//             pre=cur;
+//         }
+//         if(root->right){
+//             Node* cur=root->right;
+//             while(cur->left)
+//             cur=cur->left;
+//             suc=cur;
+//         }
+//         return ;
+//     }
+//     if(root->key < key){
+//         pre=root;
+//         findpresuc(root->right,pre,suc,key);
+//     }
+//     else if(root->key > key){
+//         suc=root;
+//         findpresuc(root->left,pre,suc,key);
+//     }
+// }
+void findpresuc(Node* root,Node* &pre,Node* &suc,int key){
+    if(!root)
         return ;
-    }
     if(root->key == key){
         if(root->left){
             Node* cur=root->left;
-            while(cur->right)
-            cur=cur->right;
+            while(cur->right){
+                cur=cur->right;
+            }
             pre=cur;
         }
         if(root->right){
             Node* cur=root->right;
-            while(cur->left)
-            cur=cur->left;
+            while(cur->left){
+                cur=cur->left;
+            }
             suc=cur;
         }
-        return ;
     }
-    if(root->key < key){
+    else if(root->key < key){
         pre=root;
         findpresuc(root->right,pre,suc,key);
     }
-    else if(root->key > key){
+    else{
         suc=root;
         findpresuc(root->left,pre,suc,key);
     }
