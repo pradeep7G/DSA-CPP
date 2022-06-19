@@ -12,25 +12,13 @@
 class Solution {
 public:
     TreeNode* deleteleafs(TreeNode * &root,int key){
-        if(!root)
+       if(!root)
+           return NULL;
+        root->left=deleteleafs(root->left,key);
+        root->right=deleteleafs(root->right,key);
+        if(root->val==key && root->left == NULL && root->right == NULL)
+        {
             return NULL;
-        if(!root->left && !root->right && root->val==key){
-            root=NULL;
-            return root;
-        }
-        if(root)
-        deleteleafs(root->left,key);
-        if(root && root->val==key && root->left==NULL && root->right==NULL)
-        {
-             root=NULL;
-            return root;
-        }
-        if(root)
-        deleteleafs(root->right,key);
-        if(root && root->val==key && root->left==NULL && root->right==NULL)
-        {
-             root=NULL;
-            return root;
         }
         return root;
     }
