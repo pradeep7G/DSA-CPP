@@ -10,16 +10,14 @@ class Solution
     public:
     void sort012(int a[], int n)
     {
-        int start=0,end=n-1,middle=0,unknown=0;
-        while(unknown<=end)
-        {
-            if(a[unknown]==0)
-            {
-                swap(a[unknown++],a[start++]);
+        // 2 2 1 0 1
+        int left=0,right=n-1,unknown=0;
+        while(unknown<=right){
+            if(a[unknown]==0){
+                swap(a[unknown++],a[left++]);
             }
-            else if(a[unknown]==2)
-            {
-                swap(a[unknown],a[end--]);
+            else if(a[unknown]==2){
+                swap(a[unknown],a[right--]);
             }
             else{
                 unknown++;
