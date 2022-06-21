@@ -23,6 +23,7 @@ public:
         return root;
     }
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        mp.clear();
         int left=0,right=inorder.size()-1;
         for(int i=0;i<inorder.size();i++){
             mp[inorder[i]]=i;
