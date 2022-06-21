@@ -15,6 +15,8 @@ public:
         if(!root){
             return {INT_MAX,INT_MIN};
         }
+        if(root->left==NULL && root->right==NULL)
+            return {root->val,root->val};
         vector<int> left=findmaxdiff(root->left,ans);
         vector<int> right=findmaxdiff(root->right,ans);
         auto curmin=min({root->val,left[0],right[0]});
