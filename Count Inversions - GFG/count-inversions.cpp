@@ -55,7 +55,7 @@ class Solution{
         ll inv=0;
         ll n1=mid-low+1,n2=high-mid;
         ll a[n1],b[n2];
-        for(ll i=low;i<n1;i++)
+        for(ll i=0;i<n1;i++)
         a[i]=arr[i+low];
         for(ll i=0;i<n2;i++)
         b[i]=arr[i+mid+1];
