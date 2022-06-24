@@ -12,17 +12,29 @@ class Solution{
     public:
     //Function to count subarrays with sum equal to 0.
     ll findSubarray(vector<ll> arr, int n ) {
-        unordered_map<int,int> mp;
+        unordered_map<int,vector<int>> mp;
         int count=0;
         ll sum=0;
+        vector<pair<ll,ll>> res;
         for(int i=0;i<n;i++){
             sum+=arr[i];
             if(sum==0)
+            {
              count++;
-            count+=mp[sum];
-            mp[sum]++;
+             res.push_back({0,i});
+            }
+            if(mp.find(sum)!=mp.end()){
+                vector<int> vc=mp[sum];
+                for(auto it=vc.begin();it!=vc.end();it++){
+                    res.push_back({*it+1,i});
+                }
+            }
+            count+=mp[sum].size();
+            mp[sum].push_back(i);
         }
         return count;
+        
+        //to find all the subarrays;
     }
 };
 
