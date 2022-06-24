@@ -65,13 +65,28 @@ class Solution{
     }
     Node * mergeKLists(Node *arr[], int K)
     {
-       Node* head=NULL;
-       Node* root=arr[0];
-       for(int i=1;i<K;i++)
-       {
-           root=merge(root,arr[i]);
-       }
-       return root;
+        //O(N^2) O(1)
+    //   Node* head=NULL;
+    //   Node* root=arr[0];
+    //   for(int i=1;i<K;i++)
+    //   {
+    //       root=merge(root,arr[i]);
+    //   }
+    //   return root;
+    
+        //O(NKLOGK) efficient approach
+        //divide lists into two halfs merge them and left with n/2 lists now repeat until you left with one list
+        int last=K-1;
+        while(last!=0){
+            int i=0,j=last;
+            while(i<j){
+                arr[i]=merge(arr[i],arr[j]);
+                i++;j--;
+            }
+            if(i>=j)
+             last=j;
+        }
+        return arr[0];
     }
 };
 
