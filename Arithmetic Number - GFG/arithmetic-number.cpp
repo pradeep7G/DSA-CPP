@@ -15,11 +15,10 @@ public:
             return 1;
            return 0;
       }
-      double k=(double)((b-a))/c+1;
-      if(k>0 && k==(int)k)
-       return 1;
-      else
-       return 0;
+     double k=(double)(b-a)/c + 1;
+     if(k>0  && (int)k==k)
+     return true;
+     return false;
     }
 };
 
