@@ -21,23 +21,20 @@ class Solution {
       
   }
     string longestPalin (string s) {
-        
-        int ans=-1;
-        int index=-1;
-        for(int i=0;i<s.size();i++)
-        {
-            int val1=palindrome(s,i,i+1); // for even length substring
-            int val2=palindrome(s,i,i);// for odd length palindromes
-             
-            int maxy=max(val1,val2);
-            
-            if(maxy>ans)
-             {
-                 ans=maxy;
-                 index=i-(maxy-1)/2;
-             }
-        }
-        return s.substr(index,ans);
+      //expand around the center or dp;
+      string res="";
+      int maxlen=INT_MIN;
+      int index=-1;
+      for(int i=0;i<s.length();i++){
+          int a=palindrome(s,i,i);
+          int b=palindrome(s,i,i+1);
+          int maxl=max(a,b);
+          if(maxlen<maxl){
+              maxlen=maxl;
+              index=i-(maxl-1)/2;
+          }
+      }
+      return s.substr(index,maxlen);
     }
 };
 
