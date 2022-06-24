@@ -16,7 +16,7 @@ public:
                }
            }
             if(flag)
-                ans+=strs[0][i];
+                ans.push_back(strs[0][i]);
             else
                 break;
         }
