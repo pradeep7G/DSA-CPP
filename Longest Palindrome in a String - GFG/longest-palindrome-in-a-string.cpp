@@ -8,17 +8,15 @@ class Solution {
   public:
   int palindrome(string s,int i,int j){
       
-      while(i>=0 && j<s.length()){
-          if(s[i]!=s[j])
-           break;
-          else{
-              i--;
-              j++;
-          }
-      }
-      
-      return j-i-1;
-      
+     while(i>=0 && j<s.length()){
+         if(s[i]!=s[j]){
+             break;
+         }
+         else{
+             j++;i--;
+         }
+     }
+     return j-i-1;
   }
     string longestPalin (string s) {
       //expand around the center or dp;
