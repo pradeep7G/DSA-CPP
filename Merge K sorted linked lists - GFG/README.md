@@ -1,5 +1,5 @@
 # Merge K sorted linked lists
-## Medium 
+##  Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given <strong>K</strong> sorted linked lists of different sizes. The task is to merge them in such a way that after merging they will be a single sorted linked list. </span></p>
 
