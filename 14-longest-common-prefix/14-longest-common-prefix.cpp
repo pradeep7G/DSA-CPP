@@ -3,7 +3,7 @@ public:
     string longestCommonPrefix(vector<string>& strs) {
         
         string ans="";
-        sort(begin(strs),end(strs));
+        // sort(begin(strs),end(strs));
         
         for(int i=0;i<strs[0].size();i++)
         {
