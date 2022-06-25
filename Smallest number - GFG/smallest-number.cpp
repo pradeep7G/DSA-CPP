@@ -14,12 +14,7 @@ public:
         return s==sum;
     }
     string smallestNumber(int s, int d){
-        string h="";
-        int cnt=d;
-        while(cnt--){
-            h+="9";
-        }
-        int lo=pow(10,d-1),hi=stoi(h);
+        int lo=pow(10,d-1),hi=pow(10,d)-1;
         for(int i=lo;i<=hi;i++){
             if(check(i,s))
                 return to_string(i);
