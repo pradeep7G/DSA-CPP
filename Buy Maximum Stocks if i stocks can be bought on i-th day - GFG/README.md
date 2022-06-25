@@ -1,5 +1,5 @@
 # Buy Maximum Stocks if i stocks can be bought on i-th day
-##  Medium 
+## Medium 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">In a stock market, there is a product with its infinite stocks. The stock prices are given for&nbsp;<strong>N</strong>&nbsp;days, where <strong>price[i]</strong> denotes the price of the stock on the i<sup>th</sup>&nbsp;day.<br>
 There is a rule that a customer can buy at most i stock on the i<sup>th</sup>&nbsp;day.<br>
