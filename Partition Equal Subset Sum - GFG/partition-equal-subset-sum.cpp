@@ -53,7 +53,7 @@ public:
         if(w==0)
          return 1;
         if(n==0)
-         return -1;
+         return 0;
         if(dp[n][w]!=-1)
          return dp[n][w];
         if(arr[n-1]<=w){
@@ -77,7 +77,8 @@ public:
          return 0;
         int target=sum/2;
         vector<vector<int>> dp(n+1,vector<int>(target+1,-1));
-        return solveiter(n,arr,target);
+        // return solveiter(n,arr,target);
+        return solve(target,n,arr,dp);
     }
 };
 
