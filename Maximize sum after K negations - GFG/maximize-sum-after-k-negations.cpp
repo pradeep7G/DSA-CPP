@@ -5,33 +5,27 @@ using namespace std;
  // } Driver Code Ends
 class Solution{
     public:
+    typedef long long ll;
     long long int maximizeSum(long long int a[], int n, int k)
     {
        sort(a,a+n);
-       for(int i=0;i<n;i++){
-           if(k<=0)
-            break;
-           if(a[i]<0){
-               a[i]*=-1;
-               k--;
-           }
+       int i=0;
+       while(k){
+           if(a[i]>=0)
+               break;
+           a[i] = -1 * a[i];
+           i++;
+           k--;
        }
-       if(k>=1){
-           if(k%2==1){
-               sort(a,a+n);
-               a[0]*=-1;
-                 long long int sum=accumulate(a,a+n,0LL);
-               return sum;
-           }
-           else{
-               long long int sum=accumulate(a,a+n,0LL);
-               return sum;
-           }
+       if(k){
+           sort(a,a+n);
+           a[0] = pow(-1,k)*a[0];
        }
-       else{
-           long long int sum=accumulate(a,a+n,0LL);
-           return sum;
-       }
+       long long sum=0;
+       for(int i=0;i<n;i++)
+           sum+=a[i];
+       
+       return sum;
     }
 };
 
