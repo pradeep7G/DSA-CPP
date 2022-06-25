@@ -16,6 +16,24 @@ public:
         set<int> s;
         
         //use pq and set to remove and add elements, you can also do it with standalone vector and insrt and erase operations
+        // int count=0;
+        // vector<int> v;
+        // for(int i=0;i<n;i++){
+        //     auto it=find(v.begin(),v.end(),pages[i]);
+        //     if(it==v.end()){
+        //         if(v.size()==c){
+        //             v.erase(v.begin());
+        //         }
+        //     v.push_back(pages[i]);
+        //     count++;
+        //     }else{
+        //         v.erase(it);
+        //         v.push_back(pages[i]);
+        //     }
+        // }
+        // return count;
+        
+        //practice
         int count=0;
         vector<int> v;
         for(int i=0;i<n;i++){
@@ -24,9 +42,10 @@ public:
                 if(v.size()==c){
                     v.erase(v.begin());
                 }
-            v.push_back(pages[i]);
-            count++;
-            }else{
+                v.push_back(pages[i]);
+                count++;
+            }
+            else{
                 v.erase(it);
                 v.push_back(pages[i]);
             }
