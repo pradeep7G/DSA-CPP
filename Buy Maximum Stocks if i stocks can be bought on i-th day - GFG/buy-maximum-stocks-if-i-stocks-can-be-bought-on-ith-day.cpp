@@ -8,22 +8,24 @@ using namespace std;
 class Solution {
 public:
     int buyMaximumProducts(int n, int k, int price[]){
-        vector<pair<int,int>> v;
-        for(int i=0;i<n;i++){
-            v.push_back({price[i],i+1});
-        }
-        sort(v.begin(),v.end());
-        int ans=0;
-        for(int i=0;i<n;i++){
-            if(k >= v[i].first * v[i].second){
-                ans+=v[i].second;
-                k-=v[i].first * v[i].second;
-            }else{
-                ans+= (k/v[i].first);
-                k-=v[i].first*(k/v[i].first);
-            }
-        };
-        return ans;
+      multiset<pair<int,int>> stocks;
+      for(int i=0;i<n;i++){
+          stocks.insert({price[i],i+1});
+      }
+      int max_stocks=0;
+      int rem_amount=k;
+      for(auto i:stocks){
+          if(rem_amount - (i.second * i.first) >=0 ){
+              rem_amount-=(i.second * i.first);
+              max_stocks+=i.second;
+          }
+          else{
+              int can_buy=rem_amount/i.first;
+              rem_amount-=(i.first * can_buy);
+              max_stocks+=can_buy;
+          }
+      }
+      return max_stocks;
     }
 };
 
