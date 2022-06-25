@@ -62,7 +62,7 @@ class Solution
         //Practice
         sort(v.begin(),v.end(),[&](auto a,auto b){
            if(a.second==b.second) {
-               a.first > b.first;
+               a.first < b.first;
            }
            return a.second < b.second;
         });
