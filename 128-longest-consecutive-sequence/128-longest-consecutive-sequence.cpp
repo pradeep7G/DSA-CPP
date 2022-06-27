@@ -7,6 +7,7 @@ public:
         for(int i=0;i<n;i++){
            if(s.find(nums[i])==s.end())
                 continue;
+            s.erase(nums[i]);
             int prev=nums[i]-1,next=nums[i]+1;
             while(s.find(prev)!=s.end())
                 s.erase(prev--);
