@@ -10,36 +10,55 @@
  */
 class Solution {
 public:
-    ListNode *reverseKgroups(ListNode *head,int k,int lenofll){
+//     ListNode *reverseKgroups(ListNode *head,int k,int lenofll){
+//         if(!head)
+//             return NULL;
+//         if(lenofll<k)
+//             return head;
+//         ListNode *cur=head,*prev=NULL,*next=NULL;
+//         int count=0;
+//         while(cur!=NULL && count<k){
+//             next=cur->next;
+//             cur->next=prev;
+//             prev=cur;
+//             cur=next;
+//             count++;
+//         }
+        
+//         if(next!=NULL && lenofll>=k)
+//             head->next=reverseKgroups(next,k,lenofll-k);
+//         return prev;
+//     }
+    ListNode *reverse_in_kGroups(ListNode *head,int k,int len){
         if(!head)
             return NULL;
-        if(lenofll<k)
+        if(len < k){
             return head;
+        }
         ListNode *cur=head,*prev=NULL,*next=NULL;
         int count=0;
-        while(cur!=NULL && count<k){
+        while(count<k){
             next=cur->next;
             cur->next=prev;
             prev=cur;
             cur=next;
             count++;
         }
-        
-        if(next!=NULL && lenofll>=k)
-            head->next=reverseKgroups(next,k,lenofll-k);
+        if(next!=NULL && len-k>=0)
+            head->next=reverse_in_kGroups(next,k,len-k);
         return prev;
     }
     ListNode* reverseKGroup(ListNode* head, int k) {
         if(!head || k==1)
             return head;
-        int lenofll=0;
-        ListNode* trav=head;
-        while(trav){
-            trav=trav->next;
-            lenofll++;
+        ListNode *cur=head;
+        int len=0;
+        while(cur){
+            cur=cur->next;
+            len++;
         }
-        ListNode *dummy=new ListNode();
-        return reverseKgroups(head,k,lenofll);
+        return reverse_in_kGroups(head,k,len);
+        // ListNode *dummy=new ListNode();
         // //do for the first group
         // ListNode *prev=NULL,*cur=head,*link=head,*link2;
         // int cnt=k;
