@@ -1,7 +1,6 @@
 class Solution {
 public:
     string build(string str){
-        unordered_map<char,int> mp;
         int n=str.length();
         int i=0;
         string ret="";
