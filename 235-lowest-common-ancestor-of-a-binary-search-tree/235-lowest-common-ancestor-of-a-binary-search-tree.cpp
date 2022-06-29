@@ -10,28 +10,28 @@
 
 class Solution {
 public:
-    TreeNode *lowestcommonancestor(TreeNode *root,TreeNode* p,TreeNode *q){
-        // if(!root)
-        //     return NULL;
-        // if(root==p || root==q){
-        //     return root;
-        // }
-        // TreeNode* leftsubtree=lowestcommonancestor(root->left,p,q);
-        // TreeNode* rightsubtree=lowestcommonancestor(root->right,p,q);
-        // if(leftsubtree && rightsubtree)
-        //     return root;
-        // return leftsubtree!=NULL?leftsubtree:rightsubtree;
+    TreeNode *lca_in_BT(TreeNode* root,TreeNode *p,TreeNode *q){
         if(!root)
             return NULL;
-        if(p->val < root->val && q->val < root->val){
-           return lowestcommonancestor(root->left,p,q);
-        }
-        else if(p->val > root->val && q->val > root->val){
-           return lowestcommonancestor(root->right,p,q);
-        }
-        else{
+        if(root==p || root==q){
             return root;
         }
+        TreeNode* leftsubtree=lowestcommonancestor(root->left,p,q);
+        TreeNode* rightsubtree=lowestcommonancestor(root->right,p,q);
+        if(leftsubtree && rightsubtree)
+            return root;
+        return leftsubtree!=NULL?leftsubtree:rightsubtree;
+    }
+    TreeNode *lowestcommonancestor(TreeNode *root,TreeNode* p,TreeNode *q){
+       if(!root)
+           return NULL;
+        if(p->val < root->val && q->val < root->val){
+            return lowestcommonancestor(root->left,p,q);
+        }
+        else if(p->val>root->val && q->val>root->val){
+            return lowestcommonancestor(root->right,p,q);
+        }
+        return root;
     }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         if(!root)
