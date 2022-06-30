@@ -1,5 +1,5 @@
 # Find Pair Given Difference
-##  Easy 
+## Easy 
 <div class="problem-statement">
                 <p></p><p><span style="font-size:18px">Given an array <strong>Arr[]</strong> of size <strong>L</strong> and a number <strong>N,</strong>&nbsp;you need to write a program to find if there exists a pair of elements in the array whose difference is <strong>N</strong>.</span></p>
 
