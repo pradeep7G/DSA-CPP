@@ -31,7 +31,7 @@ int main()
 
 int kthSmallest(int mat[MAX][MAX], int n, int k)
 {
-    //10 ---> 50 , find num of elements less than mid1 , if nelems < k,left= mid1+1 else right-mid1-1;
+    //10 ---> 50 , find num of elements less than mid1 , if nelems < k,left= mid1+1 else right=mid1-1;
     // we will stop at right value which is kth smallest and exists in the matrix;
     
     // int l=mat[0][0],r=mat[n-1][n-1];
@@ -59,6 +59,7 @@ int kthSmallest(int mat[MAX][MAX], int n, int k)
     // }
     // return l;
     
+    
     int l=0,r=10000;
     while(l<=r){
         int mid1=l+(r-l)/2;
@@ -67,7 +68,7 @@ int kthSmallest(int mat[MAX][MAX], int n, int k)
         {
             count+=(upper_bound(mat[i],mat[i]+n,mid1)-mat[i]);
         }
-        if(count<k)
+        if(count<=k-1)
         l=mid1+1;
         else
         r=mid1-1;
