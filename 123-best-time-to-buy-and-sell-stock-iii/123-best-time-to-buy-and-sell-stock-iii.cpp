@@ -2,7 +2,7 @@ class Solution {
 public:
     int maxProfit(vector<int>& prices) {
         int n=prices.size();
-        vector<int> prof(n+1,0);
+        vector<int> prof(n,0);
         int minfar=prices[0];
         for(int i=1;i<n;i++)
         {
