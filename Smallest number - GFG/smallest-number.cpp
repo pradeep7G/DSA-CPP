@@ -6,6 +6,7 @@ using namespace std;
 class Solution{   
 public: 
     bool check(int n,int sum){
+        //()
         int s=0,d=n;
         while(d){
             s+=(d%10);
@@ -14,12 +15,25 @@ public:
         return s==sum;
     }
     string smallestNumber(int s, int d){
-        int lo=pow(10,d-1),hi=pow(10,d)-1;
-        for(int i=lo;i<=hi;i++){
-            if(check(i,s))
-                return to_string(i);
-        }
-        return "-1";
+       if(s>9*d || (s==0 && d>1)){
+           return "-1";
+       }
+       string ans="";
+       s-=1;
+       for(int j=d-1;j>0;j--){
+           if(s>9){
+               ans=ans+"9";
+               s-=9;
+           }
+           else{
+               ans=ans+to_string(s);
+               s=0;
+           }
+       }
+       s+=1;
+       ans=ans+to_string(s);
+       reverse(begin(ans),end(ans));
+       return ans;
     }
 };
 
