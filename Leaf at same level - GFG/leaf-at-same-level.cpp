@@ -99,9 +99,24 @@ struct Node
 class Solution{
   public:
     /*You are required to complete this method*/
-    set<int> s;
+    set<int> s; //EXTRA Space
+    bool solve(Node *root,int level,int &leafLevel){
+        /* w
+        if(!root)
+         return true;
+        if(root->left==NULL && root->right==NULL){
+            if(leafLevel==0){
+                leafLevel=level;
+                return true;
+            }
+            return level==leafLevel;
+        }
+        return solve(root->left,level+1,leafLevel) && solve(root->right,level+1,leafLevel);
+    }
     bool check(Node *root,int l=0)
     {
+        int leaf=0;
+        solve(root,0,leaf);
         if(!root)
             return true;
         if(root->left==NULL && root->right==NULL)
