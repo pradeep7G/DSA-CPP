@@ -100,9 +100,22 @@ class Solution {
         int right=height(root->right);
         return 1+max(left,right);
     }
-    int diameter(Node* root) {  
+    int diametr=0;
+    int dfs(Node* root){
+        if(!root)
+         return 0;
+        int l=dfs(root->left);
+        int r=dfs(root->right);
+        diametr=max(diametr,l+r+1);
+        return 1 + max(l,r);
+    }
+    int diameter(Node* root) {
+        diametr=0;
         if(!root)
             return 0;
+        dfs(root);
+        return diametr;
+        //O(N)
         int a=abs(height(root->left)+height(root->right)+1);
         int left=diameter(root->left);
         int right=diameter(root->right);
