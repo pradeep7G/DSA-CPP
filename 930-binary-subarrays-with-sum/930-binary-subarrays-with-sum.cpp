@@ -19,9 +19,9 @@ public:
         for(;right<n;right++){
             if(nums[right]==1){
                 sum++;
-                if(sum>goal)
-                    sum--;
-                if(sum==goal){
+                // if(sum>goal)
+                //     sum--;
+                if(sum>=goal){
                     cnt=1;
                     while(!(nums[left++]==1)){
                         cnt++;
@@ -29,7 +29,7 @@ public:
                     res+=cnt;
                 }
             }
-            else if(sum==goal){
+            else if(sum>=goal){
                 res+=cnt;
             }
         }
