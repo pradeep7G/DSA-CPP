@@ -1,7 +1,26 @@
 class Solution {
 public:
     int MOD=1e9 + 7;
+    int solvehashmap(vector<int> &A,int target){
+        unordered_map<int, long> c;
+        for (int a : A) c[a]++;
+        long res = 0;
+        //i<j<k if sum==target order doesn't matter we assume i<k<j as i<j<k - basic
+        for (auto it : c)
+            for (auto it2 : c) {
+                int i = it.first, j = it2.first, k = target - i - j;
+                if (!c.count(k)) continue;
+                if (i == j && j == k)
+                    res += c[i] * (c[i] - 1) * (c[i] - 2) / 6;
+                else if (i == j && j != k)
+                    res += c[i] * (c[i] - 1) / 2 * c[k];
+                else if (i < j && j < k)
+                    res += c[i] * c[j] * c[k];
+            }
+        return res % int(1e9 + 7);
+    }
     int threeSumMulti(vector<int>& arr, int target) {
+        return solvehashmap(arr,target);
         int n=arr.size();
         int res=0;
         sort(arr.begin(),arr.end());
