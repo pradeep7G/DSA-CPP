@@ -10,8 +10,30 @@ class Solution{
     public:
     //Function to find the minimum number of platforms required at the
     //railway station such that no train waits.
+    
+    //two pointers
+    int platforms_required(int arr[],int dep[],int n){
+        sort(arr,arr+n);
+        sort(dep,dep+n);
+        int i=1,j=0;
+        int platforms_needed=1;
+        int res=1;
+        while(i<n && j<n){
+            if(arr[i]<=dep[j]){
+                platforms_needed++;
+                i++;
+            }
+            else{
+                platforms_needed--;
+                j++;
+            }
+            res=max(res,platforms_needed);
+        }
+        return res;
+    }
     int findPlatform(int arr[], int dep[], int n)
     {
+        return platforms_required(arr,dep,n);
     //   sort(arr,arr+n);
     //   sort(dep,dep+n);
     //   int i=1,j=0;
@@ -30,21 +52,24 @@ class Solution{
     //   }
     //   return result;
     
-    multiset<pair<int,int>> order;
-    for(int i=0;i<n;i++){
-        order.insert({arr[i],'a'});
-        order.insert({dep[i],'d'});
-    }
-    int count_platforms=0;
-    int max_platforms=0;
-    for(auto it:order){
-        if(it.second=='a')
-         count_platforms++;
-        else
-         count_platforms--;
-        max_platforms=max(max_platforms,count_platforms);
-    }
-    return max_platforms;
+    
+        /*
+        multiset<pair<int,int>> order;
+        for(int i=0;i<n;i++){
+            order.insert({arr[i],'a'});
+            order.insert({dep[i],'d'});
+        }
+        int count_platforms=0;
+        int max_platforms=0;
+        for(auto it:order){
+            if(it.second=='a')
+             count_platforms++;
+            else
+             count_platforms--;
+            max_platforms=max(max_platforms,count_platforms);
+        }
+        return max_platforms;
+        */
     }
 };
 
