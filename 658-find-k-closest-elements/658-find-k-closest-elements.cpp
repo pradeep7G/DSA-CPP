@@ -26,10 +26,10 @@ public:
     int closest_integer(vector<int> &arr,int x){
         // find index of closest element to x;
         int n=arr.size();
-        // if(arr[0]>=x)
-        //     return 0;
-        // else if(arr[n-1]<=x)
-        //     return n-1;
+        if(arr[0]>=x)
+            return 0;
+        else if(arr[n-1]<=x)
+            return n-1;
         int lo=0,hi=n-1;
         while(lo<=hi){
             int mid=lo+(hi-lo)/2;
@@ -41,8 +41,8 @@ public:
             else
                 hi=mid-1;
         }
-        if(lo>0)
-            return lo-1;
+        // if(lo>0)
+        //     return lo-1;
         return lo;
     }
 };
