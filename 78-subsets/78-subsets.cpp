@@ -13,8 +13,21 @@ public:
         //not take
         dfs(i+1,n,nums,cur);
     }
+    vector<vector<int>> bfs(int n,vector<int> &nums){
+        vector<vector<int>> res;
+        res.push_back({});
+        for(int i=0;i<n;i++){
+            vector<vector<int>> tmp=res;
+            for(auto v:tmp){
+                v.push_back(nums[i]);
+                res.push_back(v);
+            }
+        }
+        return res;
+    }
     vector<vector<int>> subsets(vector<int>& nums) {
         //Both bfs and dfs
+        return bfs(nums.size(),nums);
         int n=nums.size();
         res.clear();
         //dfs
