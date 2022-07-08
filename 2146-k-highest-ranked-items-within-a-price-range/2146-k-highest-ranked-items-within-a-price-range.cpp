@@ -5,15 +5,15 @@ public:
             if(a[0]==b[0]){
                 if(a[1]==b[1]){
                     if(a[2]==b[2]){
-                        return a[3]>b[3];
+                        return a[3]<b[3];
                     }
                     else{
-                        return a[2]>b[2];
+                        return a[2]<b[2];
                     }
                 }
-                return a[1]>b[1];
+                return a[1]<b[1];
             }
-            return a[0]>b[0];
+            return a[0]<b[0];
         }
     };
     vector<vector<int>> highestRankedKItems(vector<vector<int>>& grid, vector<int>& pricing, vector<int>& start, int k) {
@@ -39,7 +39,11 @@ public:
                  if(val!=1 && val!=0)
                  {
                     if(val>=pricing[0] && val<=pricing[1])
-                        pq.push({distance,val,front.first,front.second});
+                    {
+                      pq.push({distance,val,front.first,front.second}); 
+                      if(pq.size()>k)
+                          pq.pop();
+                    }
                  }
                 for(int i=0;i<4;i++)
                 {
@@ -57,6 +61,7 @@ public:
             pq.pop();
             res.push_back({top[2],top[3]});
         }
+        reverse(res.begin(),res.end());
         return res;
     }
 };
