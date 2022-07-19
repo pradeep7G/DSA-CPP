@@ -13,8 +13,23 @@ public:
             res+=solve(ind+2,s,n,dp);
         return dp[ind]=res;
     }
-    // int bottomUp()
+    int bottomUp(string s){
+        int n=s.length();
+        vector<int> dp(n+2,0);
+        dp[n]=1;
+        for(int ind=n-1;ind>=0;ind--){
+            if(s[ind]=='0')
+                dp[ind]=0;
+            else{
+                dp[ind]=dp[ind+1];
+                if(ind+1<n && ((s[ind]=='1' || (s[ind]=='2'&& s[ind+1]<'7'))))
+                    dp[ind]+=dp[ind+2];
+            }
+        }
+        return dp[0];
+    }
     int numDecodings(string s) {
+       return bottomUp(s);
        int n=s.length();
        vector<int> dp(n,-1);
        return solve(0,s,n,dp);
