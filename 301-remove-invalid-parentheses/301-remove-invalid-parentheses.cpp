@@ -26,10 +26,7 @@ public:
             solve(ind+1,n,s,validString+s[ind],res,rmL,rmR,open);
         }
     }
-    vector<string> removeInvalidParentheses(string s) {
-        //do bfs to generate valid paranthesis and once you find the solution then add them to the result
-        //dfs ==> since unlike bfs we don't stop/know after removing parathesis which needs to be minimum so here first we found no.of excess brackets and then do bfs by removing/not removing and storing valid parenthesis;
-        //finding excess left,right brackets
+    vector<string> dfs(string s){
         int rmL=0,rmR=0;
         int n=s.length();
         for(int i=0;i<n;i++){
@@ -48,5 +45,51 @@ public:
         unordered_set<string> res;
         solve(0,n,s,"",res,rmL,rmR,0);
         return vector<string>(res.begin(),res.end());//remove duplicates
+    }
+    bool isValid(string &s){
+        int count=0;
+        for(int i=0;i<s.length();i++){
+            if(s[i]=='('){
+                count++;
+            }
+            else if(s[i]==')'){
+                if(count==0){
+                    return false;
+                }
+                else{
+                    count--;
+                }
+            }
+        }
+        return count==0;
+    }
+    vector<string> removeInvalidParentheses(string s) {
+        //do bfs to generate valid paranthesis and once you find the solution then add them to the result
+        //dfs ==> since unlike bfs we don't stop/know after removing parathesis which needs to be minimum so here first we found no.of excess brackets and then do bfs by removing/not removing and storing valid parenthesis;
+        //finding excess left,right brackets
+        
+        //BFS
+        unordered_set<string> ht;
+        queue<string> q;
+        q.push(s);
+        vector<string> res;
+        while(!q.empty()){
+            string str=q.front();
+            q.pop();
+            if(ht.count(str))
+                continue;
+            ht.insert(str);
+            if(isValid(str)){
+                res.push_back(str);
+            }
+            else if(res.empty()){
+                for(int i=0;i<str.size();i++){
+                    if(str[i]==')' || str[i]=='('){
+                        q.push(str.substr(0,i)+str.substr(i+1));
+                    }
+                }
+            }
+        }
+        return res;
     }
 };
