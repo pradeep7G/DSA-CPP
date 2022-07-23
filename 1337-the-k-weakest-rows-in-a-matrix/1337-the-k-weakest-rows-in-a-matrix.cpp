@@ -18,7 +18,7 @@ public:
             }
             nums.push_back({count,i});
         }
-        priority_queue<pair<int,int>,vector<pair<int,int>>,compare> pq; //min_heap , 
+        priority_queue<pair<int,int>> pq; //min_heap , 
         for(auto i:nums)
         {
             pq.push(i);
