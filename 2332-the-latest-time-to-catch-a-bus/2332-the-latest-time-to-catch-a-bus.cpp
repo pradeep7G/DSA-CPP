@@ -1,8 +1,25 @@
 class Solution {
 public:
-    int latestTimeCatchTheBus(vector<int>& bus, vector<int>& pas, int cap) {
-        sort(bus.begin(),bus.end());
+    int simulate(vector<int> &buses,vector<int> &pas,int cap){
+        sort(buses.begin(),buses.end());
         sort(pas.begin(),pas.end());
+        int ans=-1;
+        int i=0,n=pas.size();
+        for(auto &bus:buses){
+            int filled=0;
+            while(filled<cap && i<n && pas[i]<=bus){
+                if(i==0 || pas[i]!=pas[i-1]+1)
+                    ans=pas[i]-1;
+                filled++;
+                i++;
+            }
+            if(filled<cap && (i==0 || pas[i-1]!=bus))
+                ans=bus;
+        }
+        return ans;
+    }
+    int latestTimeCatchTheBus(vector<int>& bus, vector<int>& pas, int cap) {
+        return simulate(bus,pas,cap);
         priority_queue<int,vector<int>,greater<int>> pq(begin(pas),end(pas));
         map<int,vector<int>> mp;
         unordered_set<int> pas_arr;
