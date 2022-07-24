@@ -20,11 +20,11 @@ public:
             return 0;
         if(dp[index]!=-1)
             return dp[index];
-        vector<int> tmp={rides[index][1],INT_MIN,INT_MIN};//next best index
-        int nextIndex=lower_bound(begin(rides),end(rides),tmp)-begin(rides);
-        if(nextIndex==index)
-            nextIndex++;
-        // int nextIndex=binarySearch(rides[index][1],rides);//at same time driver can drop-off and pick up new passenger, so upper_bound doesn't work
+        vector<int> tmp={rides[index][1],INT_MAX,INT_MAX};//next best index, if we try lower_bound,be sure values at index 1,2 be INT_MIN,INT_MIN
+        // int nextIndex=lower_bound(begin(rides),end(rides),tmp)-begin(rides);
+        // if(nextIndex==index)
+        //     nextIndex++;
+        int nextIndex=binarySearch(rides[index][1],rides);//at same time driver can drop-off and pick up new passenger, so upper_bound doesn't work
         //don't pick
         ll val1=solve(dp,rides,index+1);
         //pick
