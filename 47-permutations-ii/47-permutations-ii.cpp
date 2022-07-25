@@ -28,6 +28,8 @@ public:
         int n=nums.size();
         // solve(nums,res,0,n);
         // return res;
+        
+        //extra calculations for no.of permutatin possible with dups allowed, so that we can call next_permutation that many times;
         // unordered_map<int,int> mp;
         // vector<long long> fac(11,1);
         // for(long long i=1;i<=10;i++){
@@ -48,7 +50,8 @@ public:
         // uniquePerms/=dupPerms;
         // res.emplace_back(nums);
         // uniquePerms--;
-        //could've avoided all possible permutations calculations, we just need to check how many times we can run the nextPermutation function, so we just compare the next permutation with initial state, if it reached initial state then we explored all the permutations
+        
+        //can avoided all possible permutations calculations, we just need to check how many times we can run the nextPermutation function, so we just compare the next permutation with initial state, if it reached initial state then we explored all the permutations
         vector<int> tmp=nums;
         res.push_back(tmp);
         while(true){
