@@ -42,7 +42,52 @@ public:
         prev=root;
         getNodes(root->right,prev,first,second);
     }
+    void MorrisInorderTraversal(TreeNode* root,TreeNode* &prev,TreeNode* &first,TreeNode* &second){
+       TreeNode* cur=root;
+       while(cur){
+           if(cur->left==NULL){
+                if(prev!=NULL && prev->val > cur->val)
+                {
+                    if(first==NULL)
+                    {
+                        first=prev;
+                    }
+                    second=cur;
+                }
+                prev=cur;
+                cur=cur->right;
+           }
+           else{
+               //create/remove thread
+               TreeNode* pre=cur->left;
+               while(pre->right && pre->right!=cur)
+                   pre=pre->right;
+               
+               //if thread not exists,create
+               if(pre->right==NULL){
+                   pre->right=cur;
+                   cur=cur->left;
+               }
+               else{
+                   //if thread already exists
+                   if(prev!=NULL && prev->val > cur->val)
+                    {
+                        if(first==NULL)
+                        {
+                            first=prev;
+                        }
+                        second=cur;
+                    }
+                   pre->right=NULL;
+                   prev=cur;
+                   cur=cur->right;
+               }
+           }
+       }
+    }
     void recoverTree(TreeNode* root) {
+        if(!root)
+            return ;
         //TC:O(N),SC:O(N)
         //Can we do better?
         /*
@@ -53,8 +98,11 @@ public:
         recovertree(root,index);
         */
         //approach-2 do inorder traversal, just store the two misplced nodes refereces and swap values.. hmm sound's correct..
+        
+        //Oh wait!!, it works BUT recursion is not O(1) space right? so how to do in absolute O(1) space? YES!! Morris Inorder Traversal!!
+        
         TreeNode *prev=NULL,*first=NULL,*second=NULL;
-        getNodes(root,prev,first,second);
+        MorrisInorderTraversal(root,prev,first,second);
         int tmp=first->val;
         first->val=second->val;
         second->val=tmp;
