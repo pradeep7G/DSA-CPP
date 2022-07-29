@@ -18,7 +18,7 @@ public:
         }
         return dp[i][m][n]=max(take,notTake);
     }
-    int findMaxForm(vector<string>& strs, int m, int n) {
+    int memo(vector<string>& strs, int m, int n) {
         int size=strs.size();
         unordered_map<string,int> count;
         for(int i=0;i<size;i++){
@@ -30,5 +30,34 @@ public:
         }
         vector<vector<vector<int>>> dp(size,vector<vector<int>>(m+1,vector<int>(n+1,-1)));
         return solve(0,m,n,strs,count,dp);
+    }
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        int size=strs.size();
+        unordered_map<string,int> count;
+        for(int i=0;i<size;i++){
+            int cnt=0;
+            for(auto c:strs[i])
+                if(c=='1')
+                    cnt++;
+            count[strs[i]]=cnt;
+        }
+        vector<vector<int>> dp(m+1,vector<int>(n+1,0));
+        vector<vector<int>> cur(m+1,vector<int>(n+1,0));
+        for(int i=size-1;i>=0;i--){
+            for(int j=0;j<=m;j++){
+                for(int k=0;k<=n;k++){
+                    int notTake=dp[j][k];
+                    int take=-1e6;
+                    int ones=count[strs[i]];
+                    int zeros=strs[i].length()-ones;
+                    if(k>=ones && j>=zeros){
+                        take=1+dp[j-zeros][k-ones];
+                    }
+                    cur[j][k]=max(take,notTake);
+                }
+            }
+            dp=cur;
+        }
+        return dp[m][n];
     }
 };
