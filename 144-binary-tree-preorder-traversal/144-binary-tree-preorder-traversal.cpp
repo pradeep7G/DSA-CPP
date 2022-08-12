@@ -41,7 +41,26 @@ public:
         }
         return preOrder;
     }
+    vector<int> iterativePreorder(TreeNode* root){
+        stack<TreeNode *> st;
+        TreeNode* cur=root;
+        vector<int> preorder;
+        while(!st.empty() || cur!=NULL){
+            if(cur!=NULL){
+                preorder.push_back(cur->val);
+                st.push(cur);
+                cur=cur->left;
+            }
+            else{
+                cur=st.top();
+                st.pop();
+                cur=cur->right;
+            }
+        }
+        return preorder;
+    }
     vector<int> preorderTraversal(TreeNode* root) {
+        return iterativePreorder(root);
         return morrisPreorder(root);
         //Iterative
         if(!root)
