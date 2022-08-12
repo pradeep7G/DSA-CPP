@@ -118,6 +118,7 @@ public:
     }
     vector<string> removeInvalidParentheses(string s) {
         //practice
+        return dfs(s);
         return bfsPractice(s);
         //do bfs to generate valid paranthesis and once you find the solution then add them to the result
         //dfs ==> since unlike bfs we don't stop/know after removing parathesis which needs to be minimum so here first we found no.of excess brackets and then do bfs by removing/not removing and storing valid parenthesis;
