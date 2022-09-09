@@ -10,12 +10,9 @@ public:
         board[i][j]='#';
         bool top=false,down=false,left=false,right=false;
         top=solve(i-1,j,ind+1,n,word,board);
-        if(!top)
-        down=solve(i+1,j,ind+1,n,word,board);
-        if(!down)
-        left=solve(i,j-1,ind+1,n,word,board);
-        if(!left)
-        right=solve(i,j+1,ind+1,n,word,board);
+        down=top || solve(i+1,j,ind+1,n,word,board);
+        left=down || solve(i,j-1,ind+1,n,word,board);
+        right=left || solve(i,j+1,ind+1,n,word,board);
         if(top || down || left || right)
             return true;
         board[i][j]=tmp; //backtrack
