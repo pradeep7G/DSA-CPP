@@ -80,6 +80,33 @@ public:
         vector<vector<int>> dp(n,vector<int>(tot+1,-1));
         return topDn(0,nums,tot,dp);
     }
+    int solve3(vector<int> &nums,int target){
+        int n=nums.size();
+        int totSum=accumulate(begin(nums),end(nums),0LL);
+        if(totSum<target)
+            return 0;
+        if((totSum-target)&1)
+            return 0;
+        int tot=(totSum-target)/2;
+        vector<vector<int>> dp(n,vector<int>(tot+1,0));
+        if(nums[0]==0)
+            dp[0][0]=2;
+        else
+            dp[0][0]=1;
+        if(nums[0]!=0 && nums[0]<=tot)
+            dp[0][nums[0]]=1;
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=tot;j++){
+                //notTake
+                int notTake=dp[i-1][j];
+                int take=0;
+                if(nums[i]<=j)
+                    take+=dp[i-1][j-nums[i]];
+                dp[i][j]=take+notTake;
+            }
+        }
+        return dp[n-1][tot];
+    }
     int bottomUp(vector<int>& nums, int target){
         int n=nums.size();
         vector<unordered_map<int,int>> dp(n+1);
@@ -108,7 +135,7 @@ public:
         // return topDown(0,nums,target,memo);
     //4 Bottom Up
         // return solve1(nums,target);
-        return solve2(nums,target);
+        return solve3(nums,target);
         return bottomUp(nums,target);
     }
 };
