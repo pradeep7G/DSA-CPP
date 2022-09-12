@@ -113,7 +113,7 @@ public:
         return prev[n-1];
     }
     int uniquePathsWithObstacles(vector<vector<int>>& grid) {
-        return solvep2(grid);
+        // return solvep2(grid);
         return solvep3(grid);
         return bottomUp(grid);
         int m=grid.size(),n=grid[0].size();
