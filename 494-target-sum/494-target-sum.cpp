@@ -54,7 +54,11 @@ public:
         return dp[n][target];
     }
     int topDn(int ind,vector<int> &nums,int target,vector<vector<int>> &dp){
-        if(ind==nums.size()){
+        if(ind==nums.size()-1){
+            if(nums[ind]==0 && target==0)
+                return 2;
+            if(target==0 || nums[ind]==target)
+                return 1;
             return 0;
         }
         if(dp[ind][target]!=-1)
@@ -68,6 +72,8 @@ public:
     int solve2(vector<int> &nums,int target){
         int n=nums.size();
         int totSum=accumulate(begin(nums),end(nums),0LL);
+        if(totSum<target)
+            return 0;
         if((totSum-target)&1)
             return 0;
         int tot=(totSum-target)/2;
@@ -101,7 +107,7 @@ public:
         // vector<unordered_map<int,int>> memo(n);
         // return topDown(0,nums,target,memo);
     //4 Bottom Up
-        return solve1(nums,target);
+        // return solve1(nums,target);
         return solve2(nums,target);
         return bottomUp(nums,target);
     }
