@@ -6,6 +6,30 @@ public:
     ll mod=1e9+7;
     // int dp[51][51][51];
     int dirs[5]={1,0,-1,0,1};
+    int bottomUpPractice(int m,int n,int maxMoves,int i,int j){
+        vector<vector<int>> count(m,vector<int>(n,0));
+        count[i][j]=1;
+        ll ans=0;
+        //dp[51][51][51] can be space optimised as next state is only being dependant on current state
+        for(int move=0;move<maxMoves;move++){
+            vector<vector<int>> temp(m,vector<int>(n,0));
+            for(int i=0;i<m;i++){
+                for(int j=0;j<n;j++){
+                    for(int dir=0;dir<4;dir++){
+                        int x=i+dirs[dir],y=j+dirs[dir+1];
+                        if(x<0 || y<0 || x>=m || y>=n){
+                            ans=(ans+count[i][j])%mod;
+                        }
+                        else{
+                            temp[x][y]=(temp[x][y]+count[i][j])%mod;
+                        }
+                    }
+                }
+            }
+            count=temp;
+        }
+        return ans;
+    }
     ll bottomUp(int m,int n,int maxMove,int i,int j){
         //Test Case: m=1,n=2,maxMove=3,i=0,j=0 TRY!!
         vector<vector<int>> count(m,vector<int>(n,0));
@@ -61,10 +85,9 @@ public:
         return dp[moves][i][j]=(temp)%mod;
     }
     int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
-        //maxMoves 2 1,1, 1,2,2,1
         //no.of paths possible
-        //if we try recursive solution, there can be so many overlapping sub problem
-        // return bottomUp(m,n,maxMove,startRow,startColumn);
+        //if we try recursive solution, there can be many overlapping sub problem, dp,                     //memoizations, MLE? , bottom Up and space optimization.
+        return bottomUpPractice(m,n,maxMove,startRow,startColumn);
         vector<vector<vector<int>>> dp(maxMove,vector<vector<int>>(m,vector<int>(n,-1)));
         return topDownPractice(m,n,maxMove,0,startRow,startColumn,dp);
     }
