@@ -62,7 +62,7 @@ public:
     // }
     int findPairs(vector<int>& nums, int k) {
         // sort(nums.begin(),nums.end());//if we use hashmap no need to sort, we can directly iterate through hashmap elements TC: O(N),SC:O(N); if we use sorting and two pointers TC:O(NlogN);SC:O(1)
-        return solve(nums,k);
+        // return solve(nums,k);
         return twoPointers(nums,k);
         int n=nums.size();
         unordered_map<int,int> mp;
