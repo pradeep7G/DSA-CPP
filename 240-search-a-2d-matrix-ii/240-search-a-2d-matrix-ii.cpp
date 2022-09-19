@@ -3,7 +3,20 @@ public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         //  divide and conquer,follow up: what is that time complexity??
         int m=matrix.size(),n=matrix[0].size();
-        return solve(matrix,0,0,m-1,n-1,target);
+        return approach2(matrix,target);
+    }
+    bool approach2(vector<vector<int>> &mat,int target){
+        int m=mat.size(),n=mat[0].size();
+        int j=n-1,i=0;
+        for(;j>=0 and i<m;){
+            if(mat[i][j]==target)
+                return true;
+            else if(mat[i][j]<target)
+                i++;
+            else
+                j--;
+        }
+        return false;
     }
     bool solve(vector<vector<int>> &mat,int left,int top,int right,int bottom,int target){
         if(right<left || bottom<top)
