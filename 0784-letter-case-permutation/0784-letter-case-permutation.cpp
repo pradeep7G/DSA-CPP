@@ -36,7 +36,8 @@ public:
         return res;
     }
     vector<string> letterCasePermutation(string s) {
-        // dfs(0,s.length(),s);
-        return bfs(s);
+        dfs(0,s.length(),s);
+        // return bfs(s);
+        return res;
     }
 };
