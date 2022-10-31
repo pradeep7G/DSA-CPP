@@ -2,11 +2,12 @@
 # limit clause, nested queries, correlated-queries..
 
 #1
-select (select distinct salary
-from Employee
-order by salary DESC
-limit 1 offset 1) as SecondHighestSalary;
+select (select distinct salary from Employee order by salary desc limit 1 offset 1) SecondHighestSalary;
 
+# select (select distinct salary
+# from Employee
+# order by salary DESC
+# limit 1 offset 1) as SecondHighestSalary;
 # NOTE: can't handle null values, might handle it with extra code like using if else etc.. but can try with nested queries with max aggrigate function.
 #2
 
